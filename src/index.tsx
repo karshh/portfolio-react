@@ -1,16 +1,24 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Home } from './pages'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 )
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>
 )
 
 // If you want to start measuring performance in your app, pass a function

@@ -5,7 +5,7 @@ const NavBar = (): JSX.Element => {
   return (
     <Navbar>
       <Container>
-        <Navbar.Brand>usharma</Navbar.Brand>
+        <Navbar.Brand href="/">usharma</Navbar.Brand>
         <Nav>
           <Nav.Link href="/home">Home</Nav.Link>
           <Nav.Link href="/news">News</Nav.Link>

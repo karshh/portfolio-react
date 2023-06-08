@@ -1,3 +1,0 @@
-export const TIME_STARTED = 'TIME_STARTED'
-export const TIME_SUCCEEDED = 'TIME_SUCCEEDED'
-export const TIME_FAILED = 'TIME_FAILED'

@@ -1,19 +1,13 @@
-import { useSelector } from 'react-redux'
 import { NavBar } from 'src/components/NavBar'
 import { ReactComponent as CalgarySVG } from './Calgary.svg'
 import { Col, Row } from 'react-bootstrap'
 import { FaMapMarkerAlt, FaRegClock } from 'react-icons/fa'
 import { BsThermometerHalf } from 'react-icons/bs'
 import styles from './Home.scss'
-import { type AppState } from 'src/features/store'
+import { Clock } from 'src/components/Clock'
+import Weather from 'src/components/Weather/Weather'
 
-const Home = (): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
-  const time = useSelector((state: AppState) => state.time.time)
-
-  const current = new Date()
-  console.log(time)
-  return (
+const Home = (): JSX.Element => (
     <>
       <NavBar />
       <div className="text-center">
@@ -34,10 +28,12 @@ const Home = (): JSX.Element => {
         <span><FaMapMarkerAlt /> Calgary, AB</span>
         </Col>
         <Col>
-         <span><FaRegClock /> {current.getHours()}:{current.getMinutes()} AM</span>
+          <FaRegClock />
+          <Clock />
         </Col>
         <Col>
-        <BsThermometerHalf /> 10 &deg;C
+          <BsThermometerHalf />
+          <Weather />
         </Col>
       </Row>
       <div className={styles.svg}>
@@ -45,7 +41,6 @@ const Home = (): JSX.Element => {
       </div>
       </div>
     </>
-  )
-}
+)
 
 export default Home
