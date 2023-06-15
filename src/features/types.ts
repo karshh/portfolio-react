@@ -9,13 +9,25 @@ export enum TimeZone {
   MST
 }
 
-export interface TimeState {
-  unixtime: number
-  timezone?: TimeZone
+interface AbstractState {
   status: ApiLoadStatus
 }
 
-export interface WeatherState {
+export interface TimeState extends AbstractState {
+  unixtime: number
+  timezone?: TimeZone
+}
+
+export interface WeatherState extends AbstractState {
   temperature?: number
-  status: ApiLoadStatus
+}
+
+export interface NewsItem {
+  title: string
+  pubdate: Date
+  linkUrl: URL
+}
+
+export interface NewsState extends AbstractState {
+  newsItems: NewsItem[]
 }

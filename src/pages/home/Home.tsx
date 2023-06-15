@@ -1,4 +1,3 @@
-import { NavBar } from 'src/components/NavBar'
 import { ReactComponent as CalgarySVG } from './Calgary.svg'
 import { Col, Row } from 'react-bootstrap'
 import { FaMapMarkerAlt, FaRegClock } from 'react-icons/fa'
@@ -9,8 +8,7 @@ import Weather from 'src/components/Weather/Weather'
 
 const Home = (): JSX.Element => (
     <>
-      <NavBar />
-      <div className="text-center">
+      <div className="text-center intro">
         <h3>&#123; name = Karsh &#125;</h3>
         <p> Welcome to my corner. </p>
         <p>

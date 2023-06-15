@@ -7,10 +7,11 @@ const NavBar = (): JSX.Element => {
       <Container>
         <Navbar.Brand href="/">usharma</Navbar.Brand>
         <Nav>
-          <Nav.Link href="/home">Home</Nav.Link>
-          <Nav.Link href="/news">News</Nav.Link>
-          <Nav.Link href="/sait">Sait</Nav.Link>
-          <Nav.Link href="/contact">Contact</Nav.Link>
+          {
+            ['Home', 'News', 'SAIT', 'Contact'].map((item, key) => (
+              <Nav.Link key={key} href={'/' + item.toLowerCase()}>{item.toUpperCase()}</Nav.Link>)
+            )
+          }
         </Nav>
       </Container>
     </Navbar>
