@@ -1,11 +1,13 @@
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { Home, News } from './pages'
 import { NavBar } from './components/NavBar'
+import { Footer } from './components/Footer'
 
 const Dashboard = (): JSX.Element => (
   <>
     <NavBar />
     <Outlet />
+    <Footer />
   </>
 )
 
