@@ -11,7 +11,7 @@ export default function Sait() {
     </div></div></section>
     <section className="container light-section"><div className="text-center"><h2>Journey</h2></div><hr />
       {projects.map((project) => <article className="project" key={project.title}><h4>{project.title}</h4><div>{project.skills.map((item) => <span className="badge" key={item}>{item}</span>)}</div>
-        <p>◷ {project.timeline}</p><p>⌘ <a href={`https://${project.github}`} target="_blank" rel="noreferrer">{project.github}</a></p><p>▤ <a href={`https://${project.website}`} target="_blank" rel="noreferrer">{project.website}</a></p><p>{project.description}</p>
+        <p>◷ {project.timeline}</p><p>⌘ <a href={`https://${project.github}`} target="_blank" rel="noreferrer">{project.github}</a></p><p>▤ <a href={`https://${project.website}`} target="_blank" rel="noreferrer">{project.website}</a></p>{project.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
       </article>)}
     </section>
   </>;

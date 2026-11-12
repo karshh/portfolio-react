@@ -36,7 +36,7 @@ export async function getNews(): Promise<NewsItem[]> {
       const link = new URL(item.link);
       const date = new Date(item.pubdate);
       if (link.protocol !== "https:" || Number.isNaN(date.valueOf()) || (link.hostname === "newsroom.calgary.ca" && link.pathname === "/")) return [];
-      return [{ title: item.title.trim(), pubdate: date.toISOString(), href: link.href }];
+      return [{ title: item.title.trim(), pubdate: item.pubdate, href: link.href }];
     } catch { return []; }
   }).sort((a, b) => Date.parse(b.pubdate) - Date.parse(a.pubdate)).slice(0, 11);
 }

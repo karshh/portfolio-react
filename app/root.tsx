@@ -9,6 +9,7 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
+import { useEffect, useState } from "react";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -39,14 +40,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
   return (
-    <div className="site-shell">
+    <div className="site-shell" data-hydrated={hydrated}>
       <nav className="navbar">
         <div className="container nav-inner">
           <NavLink className="brand" to="/">usharma</NavLink>
-          <div className="nav-links" aria-label="Primary navigation">
+          <button className="nav-toggle" type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" aria-label="Toggle navigation" onClick={() => setMenuOpen((open) => !open)}><span /></button>
+          <div id="primary-navigation" className={`nav-links${menuOpen ? " open" : ""}`} aria-label="Primary navigation">
             {["home", "news", "sait", "contact"].map((item) => (
-              <NavLink key={item} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to={`/${item}`}>{item}</NavLink>
+              <NavLink key={item} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to={`/${item}`} onClick={() => setMenuOpen(false)}>{item}</NavLink>
             ))}
           </div>
         </div>

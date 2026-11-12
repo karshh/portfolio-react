@@ -1,8 +1,10 @@
 import type { Route } from "./+types/news";
 import { CalgaryMap } from "~/components/map";
 import { getDetours, getNews, getTraffic } from "~/lib/data.server";
+import { fixtureDetours, fixtureNews, fixtureTraffic } from "~/lib/e2e-fixtures.server";
 
 export async function loader() {
+  if (process.env.PORTFOLIO_E2E_FIXTURES === "true") return { news: fixtureNews, traffic: fixtureTraffic, detours: fixtureDetours, newsError: false };
   const [news, traffic, detours] = await Promise.allSettled([getNews(), getTraffic(), getDetours()]);
   return {
     news: news.status === "fulfilled" ? news.value : [],
@@ -12,9 +14,9 @@ export async function loader() {
   };
 }
 
-function NewsPanel({ item }: { item: Awaited<ReturnType<typeof getNews>>[number] }) {
+function NewsPanel({ item, featured = false }: { item: Awaited<ReturnType<typeof getNews>>[number]; featured?: boolean }) {
   const date = new Date(item.pubdate);
-  return <a className="news-panel" href={item.href} target="_blank" rel="noreferrer"><h6>{item.title}.</h6><p><small>{date.toLocaleDateString()} {date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</small></p></a>;
+  return <a className={`news-panel${featured ? " featured" : ""}`} href={item.href} target="_blank" rel="noopener noreferrer"><h6>{item.title}.</h6><p><small>{date.toLocaleDateString()} {date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</small></p></a>;
 }
 
 export default function News({ loaderData }: Route.ComponentProps) {
@@ -23,7 +25,7 @@ export default function News({ loaderData }: Route.ComponentProps) {
     <section className="container page-content">
       <div className="text-center"><h3>Recent Local News</h3><p>Powered by: <a href="https://newsroom.calgary.ca/">The Calgary Newsroom</a></p></div><hr />
       {newsError ? <div className="text-center error" role="alert">Local news is temporarily unavailable.</div> : <div data-testid="news-list">
-        <div className="row"><div className="col-6">{news.slice(0, 1).map((item) => <NewsPanel key={item.href} item={item} />)}</div><div className="col-6">{news.slice(1, 4).map((item) => <NewsPanel key={item.href} item={item} />)}</div></div>
+        <div className="row"><div className="col-6">{news.slice(0, 1).map((item) => <NewsPanel key={item.href} item={item} featured />)}</div><div className="col-6">{news.slice(1, 4).map((item) => <NewsPanel key={item.href} item={item} />)}</div></div>
         <div className="row">{news.slice(4, 7).map((item) => <div className="col-4" key={item.href}><NewsPanel item={item} /></div>)}</div>
         <div className="row justify-center">{news.slice(7, 11).map((item) => <div className="col-3" key={item.href}><NewsPanel item={item} /></div>)}</div>
       </div>}<br /><br />

@@ -8,7 +8,8 @@
     "start": "node server.js",
     "typecheck": "react-router typegen && tsc -b",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:visual:update": "playwright test e2e/visual.spec.ts --update-snapshots"
   },
   "dependencies": {
     "@react-router/express": "^8.5.1",

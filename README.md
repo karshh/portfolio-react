@@ -32,6 +32,17 @@ npm run build
 npm run test:e2e
 ```
 
+The E2E suite covers secure contact submission, responsive overflow at
+390/768/1440px, keyboard navigation, shared design tokens, and desktop/mobile
+visual snapshots for every route. It uses deterministic server fixtures.
+Only run `npm run test:visual:update` after reviewing an intentional design
+change.
+
+For direct cross-codebase parity, run Angular on port 4202 and React on 4200,
+then set `ANGULAR_BASE_URL=http://127.0.0.1:4202` when running
+`npm run test:e2e`. The parity suite compares navigation, typography, section
+geometry, colors, overflow, and page structure at desktop and mobile sizes.
+
 ## Production contact configuration
 
 Set `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`,

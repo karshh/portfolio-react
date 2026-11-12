@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import type { Route } from "./+types/home";
 import { getWeather } from "~/lib/data.server";
 import { formatCalgaryTime } from "~/lib/time";
+import { fixtureWeather } from "~/lib/e2e-fixtures.server";
 
 export async function loader() {
+  if (process.env.PORTFOLIO_E2E_FIXTURES === "true") return { weather: fixtureWeather, weatherError: false };
   try { return { weather: await getWeather(), weatherError: false }; }
   catch { return { weather: null, weatherError: true }; }
 }
